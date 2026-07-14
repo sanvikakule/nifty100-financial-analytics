@@ -41,18 +41,52 @@ logging.basicConfig(
 
 def load_file(file_path):
     """
-    Reads CSV or Excel file.
+    Reads CSV/Excel files and automatically detects the correct header row.
     """
 
+    # ---------- CSV ----------
     if file_path.suffix.lower() == ".csv":
-        return pd.read_csv(file_path)
 
+        # Read first 5 rows without assuming a header
+        preview = pd.read_csv(file_path, header=None, nrows=5)
+
+        header_row = 0
+
+        for i in range(len(preview)):
+            row = preview.iloc[i].astype(str).str.lower().tolist()
+
+            if (
+                "company_id" in row
+                or "id" in row
+                or "year" in row
+            ):
+                header_row = i
+                break
+
+        return pd.read_csv(file_path, header=header_row)
+
+    # ---------- Excel ----------
     elif file_path.suffix.lower() in [".xlsx", ".xls"]:
-        return pd.read_excel(file_path)
+
+        preview = pd.read_excel(file_path, header=None, nrows=5)
+
+        header_row = 0
+
+        for i in range(len(preview)):
+            row = preview.iloc[i].astype(str).str.lower().tolist()
+
+            if (
+                "company_id" in row
+                or "id" in row
+                or "year" in row
+            ):
+                header_row = i
+                break
+
+        return pd.read_excel(file_path, header=header_row)
 
     else:
         raise Exception("Unsupported file format")
-
 
 # ==========================================================
 # CLEAN DATAFRAME

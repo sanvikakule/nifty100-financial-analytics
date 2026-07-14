@@ -1,0 +1,227 @@
+2026-07-14 10:20:51,298 - INFO - ETL Started
+2026-07-14 10:20:51,686 - INFO - analysis.xlsx loaded
+2026-07-14 10:20:51,689 - INFO - analysis.xlsx cleaned
+2026-07-14 10:20:51,692 - INFO - analysis_clean.csv saved
+2026-07-14 10:20:51,822 - INFO - balancesheet.xlsx loaded
+2026-07-14 10:20:51,837 - INFO - balancesheet.xlsx cleaned
+2026-07-14 10:20:51,841 - INFO - balancesheet_clean.csv saved
+2026-07-14 10:20:51,923 - INFO - cashflow.xlsx loaded
+2026-07-14 10:20:51,930 - INFO - cashflow.xlsx cleaned
+2026-07-14 10:20:51,944 - INFO - cashflow_clean.csv saved
+2026-07-14 10:20:51,965 - INFO - companies.xlsx loaded
+2026-07-14 10:20:51,971 - INFO - companies.xlsx cleaned
+2026-07-14 10:20:51,974 - INFO - companies_clean.csv saved
+2026-07-14 10:20:52,041 - INFO - documents.xlsx loaded
+2026-07-14 10:20:52,047 - INFO - documents.xlsx cleaned
+2026-07-14 10:20:52,053 - INFO - documents_clean.csv saved
+2026-07-14 10:20:52,206 - INFO - financial_ratios.xlsx loaded
+2026-07-14 10:20:52,211 - INFO - financial_ratios.xlsx cleaned
+2026-07-14 10:20:52,221 - INFO - financial_ratios_clean.csv saved
+2026-07-14 10:20:52,271 - INFO - market_cap.xlsx loaded
+2026-07-14 10:20:52,273 - INFO - market_cap.xlsx cleaned
+2026-07-14 10:20:52,287 - INFO - market_cap_clean.csv saved
+2026-07-14 10:20:52,297 - INFO - peer_groups.xlsx loaded
+2026-07-14 10:20:52,300 - INFO - peer_groups.xlsx cleaned
+2026-07-14 10:20:52,302 - INFO - peer_groups_clean.csv saved
+2026-07-14 10:20:52,470 - INFO - profitandloss.xlsx loaded
+2026-07-14 10:20:52,492 - INFO - profitandloss.xlsx cleaned
+2026-07-14 10:20:52,506 - INFO - profitandloss_clean.csv saved
+2026-07-14 10:20:52,513 - INFO - prosandcons.xlsx loaded
+2026-07-14 10:20:52,517 - INFO - prosandcons.xlsx cleaned
+2026-07-14 10:20:52,519 - INFO - prosandcons_clean.csv saved
+2026-07-14 10:20:52,541 - INFO - sectors.xlsx loaded
+2026-07-14 10:20:52,544 - INFO - sectors.xlsx cleaned
+2026-07-14 10:20:52,545 - INFO - sectors_clean.csv saved
+2026-07-14 10:20:53,006 - INFO - stock_prices.xlsx loaded
+2026-07-14 10:20:53,018 - INFO - stock_prices.xlsx cleaned
+2026-07-14 10:20:53,054 - INFO - stock_prices_clean.csv saved
+2026-07-14 10:20:53,054 - INFO - ETL Completed
+2026-07-14 10:31:29,486 - INFO - ========== ETL Started ==========
+2026-07-14 10:31:29,690 - INFO - analysis.xlsx loaded successfully
+2026-07-14 10:31:29,694 - INFO - analysis.xlsx cleaned
+2026-07-14 10:31:29,697 - INFO - analysis_clean.csv saved
+2026-07-14 10:31:29,913 - INFO - balancesheet.xlsx loaded successfully
+2026-07-14 10:31:29,965 - INFO - balancesheet.xlsx cleaned
+2026-07-14 10:31:29,971 - INFO - balancesheet_clean.csv saved
+2026-07-14 10:31:30,071 - INFO - cashflow.xlsx loaded successfully
+2026-07-14 10:31:30,080 - INFO - cashflow.xlsx cleaned
+2026-07-14 10:31:30,083 - INFO - cashflow_clean.csv saved
+2026-07-14 10:31:30,111 - INFO - companies.xlsx loaded successfully
+2026-07-14 10:31:30,118 - INFO - companies.xlsx cleaned
+2026-07-14 10:31:30,120 - INFO - companies_clean.csv saved
+2026-07-14 10:31:30,206 - INFO - documents.xlsx loaded successfully
+2026-07-14 10:31:30,212 - INFO - documents.xlsx cleaned
+2026-07-14 10:31:30,216 - INFO - documents_clean.csv saved
+2026-07-14 10:31:30,383 - INFO - financial_ratios.xlsx loaded successfully
+2026-07-14 10:31:30,388 - INFO - financial_ratios.xlsx cleaned
+2026-07-14 10:31:30,400 - INFO - financial_ratios_clean.csv saved
+2026-07-14 10:31:30,449 - INFO - market_cap.xlsx loaded successfully
+2026-07-14 10:31:30,454 - INFO - market_cap.xlsx cleaned
+2026-07-14 10:31:30,459 - INFO - market_cap_clean.csv saved
+2026-07-14 10:31:30,470 - INFO - peer_groups.xlsx loaded successfully
+2026-07-14 10:31:30,472 - INFO - peer_groups.xlsx cleaned
+2026-07-14 10:31:30,474 - INFO - peer_groups_clean.csv saved
+2026-07-14 10:31:30,631 - INFO - profitandloss.xlsx loaded successfully
+2026-07-14 10:31:30,656 - INFO - profitandloss.xlsx cleaned
+2026-07-14 10:31:30,662 - INFO - profitandloss_clean.csv saved
+2026-07-14 10:31:30,670 - INFO - prosandcons.xlsx loaded successfully
+2026-07-14 10:31:30,674 - INFO - prosandcons.xlsx cleaned
+2026-07-14 10:31:30,675 - INFO - prosandcons_clean.csv saved
+2026-07-14 10:31:30,695 - INFO - sectors.xlsx loaded successfully
+2026-07-14 10:31:30,697 - INFO - sectors.xlsx cleaned
+2026-07-14 10:31:30,700 - INFO - sectors_clean.csv saved
+2026-07-14 10:31:31,299 - INFO - stock_prices.xlsx loaded successfully
+2026-07-14 10:31:31,310 - INFO - stock_prices.xlsx cleaned
+2026-07-14 10:31:31,342 - INFO - stock_prices_clean.csv saved
+2026-07-14 10:31:31,344 - INFO - Load audit saved at C:\Users\Admin\nifty100-financial-analytics\output\load_audit.csv
+2026-07-14 10:31:31,345 - INFO - ========== ETL Completed ==========
+2026-07-14 10:55:57,557 - INFO - ========== ETL Started ==========
+2026-07-14 10:55:57,779 - INFO - analysis.xlsx loaded successfully
+2026-07-14 10:55:57,786 - INFO - analysis.xlsx cleaned
+2026-07-14 10:55:57,790 - INFO - analysis_clean.csv saved
+2026-07-14 10:55:57,958 - INFO - balancesheet.xlsx loaded successfully
+2026-07-14 10:55:57,966 - INFO - balancesheet.xlsx cleaned
+2026-07-14 10:55:57,972 - INFO - balancesheet_clean.csv saved
+2026-07-14 10:55:58,067 - INFO - cashflow.xlsx loaded successfully
+2026-07-14 10:55:58,073 - INFO - cashflow.xlsx cleaned
+2026-07-14 10:55:58,077 - INFO - cashflow_clean.csv saved
+2026-07-14 10:55:58,105 - INFO - companies.xlsx loaded successfully
+2026-07-14 10:55:58,110 - INFO - companies.xlsx cleaned
+2026-07-14 10:55:58,112 - INFO - companies_clean.csv saved
+2026-07-14 10:55:58,194 - INFO - documents.xlsx loaded successfully
+2026-07-14 10:55:58,200 - INFO - documents.xlsx cleaned
+2026-07-14 10:55:58,204 - INFO - documents_clean.csv saved
+2026-07-14 10:55:58,375 - INFO - financial_ratios.xlsx loaded successfully
+2026-07-14 10:55:58,380 - ERROR - financial_ratios.xlsx : 'DataFrame' object has no attribute 'dtype'
+2026-07-14 10:55:58,432 - INFO - market_cap.xlsx loaded successfully
+2026-07-14 10:55:58,435 - ERROR - market_cap.xlsx : 'DataFrame' object has no attribute 'dtype'
+2026-07-14 10:55:58,450 - INFO - peer_groups.xlsx loaded successfully
+2026-07-14 10:55:58,454 - INFO - peer_groups.xlsx cleaned
+2026-07-14 10:55:58,456 - INFO - peer_groups_clean.csv saved
+2026-07-14 10:55:58,621 - INFO - profitandloss.xlsx loaded successfully
+2026-07-14 10:55:58,627 - ERROR - profitandloss.xlsx : invalid error value specified
+2026-07-14 10:55:58,636 - INFO - prosandcons.xlsx loaded successfully
+2026-07-14 10:55:58,640 - INFO - prosandcons.xlsx cleaned
+2026-07-14 10:55:58,642 - INFO - prosandcons_clean.csv saved
+2026-07-14 10:55:58,659 - INFO - sectors.xlsx loaded successfully
+2026-07-14 10:55:58,663 - ERROR - sectors.xlsx : 'DataFrame' object has no attribute 'dtype'
+2026-07-14 10:55:59,148 - INFO - stock_prices.xlsx loaded successfully
+2026-07-14 10:55:59,158 - ERROR - stock_prices.xlsx : 'DataFrame' object has no attribute 'dtype'
+2026-07-14 10:55:59,161 - INFO - Load audit saved at C:\Users\Admin\nifty100-financial-analytics\output\load_audit.csv
+2026-07-14 10:55:59,163 - INFO - ========== ETL Completed ==========
+2026-07-14 11:06:03,935 - INFO - ========== ETL Started ==========
+2026-07-14 11:06:04,162 - INFO - analysis.xlsx loaded successfully
+2026-07-14 11:06:04,166 - INFO - analysis.xlsx cleaned
+2026-07-14 11:06:04,169 - INFO - analysis_clean.csv saved
+2026-07-14 11:06:04,355 - INFO - balancesheet.xlsx loaded successfully
+2026-07-14 11:06:04,376 - INFO - balancesheet.xlsx cleaned
+2026-07-14 11:06:04,385 - INFO - balancesheet_clean.csv saved
+2026-07-14 11:06:04,489 - INFO - cashflow.xlsx loaded successfully
+2026-07-14 11:06:04,498 - INFO - cashflow.xlsx cleaned
+2026-07-14 11:06:04,502 - INFO - cashflow_clean.csv saved
+2026-07-14 11:06:04,531 - INFO - companies.xlsx loaded successfully
+2026-07-14 11:06:04,537 - INFO - companies.xlsx cleaned
+2026-07-14 11:06:04,539 - INFO - companies_clean.csv saved
+2026-07-14 11:06:04,627 - INFO - documents.xlsx loaded successfully
+2026-07-14 11:06:04,636 - INFO - documents.xlsx cleaned
+2026-07-14 11:06:04,640 - INFO - documents_clean.csv saved
+2026-07-14 11:06:04,803 - INFO - financial_ratios.xlsx loaded successfully
+2026-07-14 11:06:04,809 - INFO - financial_ratios.xlsx cleaned
+2026-07-14 11:06:04,819 - INFO - financial_ratios_clean.csv saved
+2026-07-14 11:06:04,875 - INFO - market_cap.xlsx loaded successfully
+2026-07-14 11:06:04,878 - INFO - market_cap.xlsx cleaned
+2026-07-14 11:06:04,881 - INFO - market_cap_clean.csv saved
+2026-07-14 11:06:04,892 - INFO - peer_groups.xlsx loaded successfully
+2026-07-14 11:06:04,894 - INFO - peer_groups.xlsx cleaned
+2026-07-14 11:06:04,896 - INFO - peer_groups_clean.csv saved
+2026-07-14 11:06:05,059 - INFO - profitandloss.xlsx loaded successfully
+2026-07-14 11:06:05,081 - INFO - profitandloss.xlsx cleaned
+2026-07-14 11:06:05,087 - INFO - profitandloss_clean.csv saved
+2026-07-14 11:06:05,097 - INFO - prosandcons.xlsx loaded successfully
+2026-07-14 11:06:05,101 - INFO - prosandcons.xlsx cleaned
+2026-07-14 11:06:05,102 - INFO - prosandcons_clean.csv saved
+2026-07-14 11:06:05,117 - INFO - sectors.xlsx loaded successfully
+2026-07-14 11:06:05,119 - INFO - sectors.xlsx cleaned
+2026-07-14 11:06:05,121 - INFO - sectors_clean.csv saved
+2026-07-14 11:06:05,586 - INFO - stock_prices.xlsx loaded successfully
+2026-07-14 11:06:05,595 - INFO - stock_prices.xlsx cleaned
+2026-07-14 11:06:05,619 - INFO - stock_prices_clean.csv saved
+2026-07-14 11:06:05,621 - INFO - Load audit saved at C:\Users\Admin\nifty100-financial-analytics\output\load_audit.csv
+2026-07-14 11:06:05,622 - INFO - ========== ETL Completed ==========
+2026-07-14 11:12:59,818 - INFO - ========== ETL Started ==========
+2026-07-14 11:13:00,036 - INFO - analysis.xlsx loaded successfully
+2026-07-14 11:13:00,040 - INFO - analysis.xlsx cleaned
+2026-07-14 11:13:00,044 - INFO - analysis_clean.csv saved
+2026-07-14 11:13:00,240 - INFO - balancesheet.xlsx loaded successfully
+2026-07-14 11:13:00,246 - INFO - balancesheet.xlsx cleaned
+2026-07-14 11:13:00,252 - INFO - balancesheet_clean.csv saved
+2026-07-14 11:13:00,359 - INFO - cashflow.xlsx loaded successfully
+2026-07-14 11:13:00,368 - INFO - cashflow.xlsx cleaned
+2026-07-14 11:13:00,374 - INFO - cashflow_clean.csv saved
+2026-07-14 11:13:00,417 - INFO - companies.xlsx loaded successfully
+2026-07-14 11:13:00,426 - INFO - companies.xlsx cleaned
+2026-07-14 11:13:00,429 - INFO - companies_clean.csv saved
+2026-07-14 11:13:00,519 - INFO - documents.xlsx loaded successfully
+2026-07-14 11:13:00,526 - INFO - documents.xlsx cleaned
+2026-07-14 11:13:00,530 - INFO - documents_clean.csv saved
+2026-07-14 11:13:00,706 - INFO - financial_ratios.xlsx loaded successfully
+2026-07-14 11:13:00,711 - INFO - financial_ratios.xlsx cleaned
+2026-07-14 11:13:00,726 - INFO - financial_ratios_clean.csv saved
+2026-07-14 11:13:00,780 - INFO - market_cap.xlsx loaded successfully
+2026-07-14 11:13:00,782 - INFO - market_cap.xlsx cleaned
+2026-07-14 11:13:00,788 - INFO - market_cap_clean.csv saved
+2026-07-14 11:13:00,807 - INFO - peer_groups.xlsx loaded successfully
+2026-07-14 11:13:00,809 - INFO - peer_groups.xlsx cleaned
+2026-07-14 11:13:00,810 - INFO - peer_groups_clean.csv saved
+2026-07-14 11:13:00,977 - INFO - profitandloss.xlsx loaded successfully
+2026-07-14 11:13:00,984 - ERROR - profitandloss.xlsx : invalid error value specified
+2026-07-14 11:13:00,998 - INFO - prosandcons.xlsx loaded successfully
+2026-07-14 11:13:01,000 - INFO - prosandcons.xlsx cleaned
+2026-07-14 11:13:01,002 - INFO - prosandcons_clean.csv saved
+2026-07-14 11:13:01,027 - INFO - sectors.xlsx loaded successfully
+2026-07-14 11:13:01,029 - INFO - sectors.xlsx cleaned
+2026-07-14 11:13:01,031 - INFO - sectors_clean.csv saved
+2026-07-14 11:13:01,493 - INFO - stock_prices.xlsx loaded successfully
+2026-07-14 11:13:01,502 - INFO - stock_prices.xlsx cleaned
+2026-07-14 11:13:01,528 - INFO - stock_prices_clean.csv saved
+2026-07-14 11:13:01,530 - INFO - Load audit saved at C:\Users\Admin\nifty100-financial-analytics\output\load_audit.csv
+2026-07-14 11:13:01,530 - INFO - ========== ETL Completed ==========
+2026-07-14 11:36:08,703 - INFO - ========== ETL Started ==========
+2026-07-14 11:36:09,141 - INFO - analysis.xlsx loaded successfully
+2026-07-14 11:36:09,147 - INFO - analysis.xlsx cleaned
+2026-07-14 11:36:09,150 - INFO - analysis_clean.csv saved
+2026-07-14 11:36:09,359 - INFO - balancesheet.xlsx loaded successfully
+2026-07-14 11:36:09,364 - INFO - balancesheet.xlsx cleaned
+2026-07-14 11:36:09,369 - INFO - balancesheet_clean.csv saved
+2026-07-14 11:36:09,459 - INFO - cashflow.xlsx loaded successfully
+2026-07-14 11:36:09,463 - INFO - cashflow.xlsx cleaned
+2026-07-14 11:36:09,467 - INFO - cashflow_clean.csv saved
+2026-07-14 11:36:09,500 - INFO - companies.xlsx loaded successfully
+2026-07-14 11:36:09,503 - INFO - companies.xlsx cleaned
+2026-07-14 11:36:09,505 - INFO - companies_clean.csv saved
+2026-07-14 11:36:09,586 - INFO - documents.xlsx loaded successfully
+2026-07-14 11:36:09,592 - INFO - documents.xlsx cleaned
+2026-07-14 11:36:09,594 - INFO - documents_clean.csv saved
+2026-07-14 11:36:09,742 - INFO - financial_ratios.xlsx loaded successfully
+2026-07-14 11:36:09,751 - INFO - financial_ratios.xlsx cleaned
+2026-07-14 11:36:09,760 - INFO - financial_ratios_clean.csv saved
+2026-07-14 11:36:09,806 - INFO - market_cap.xlsx loaded successfully
+2026-07-14 11:36:09,808 - INFO - market_cap.xlsx cleaned
+2026-07-14 11:36:09,811 - INFO - market_cap_clean.csv saved
+2026-07-14 11:36:09,826 - INFO - peer_groups.xlsx loaded successfully
+2026-07-14 11:36:09,828 - INFO - peer_groups.xlsx cleaned
+2026-07-14 11:36:09,829 - INFO - peer_groups_clean.csv saved
+2026-07-14 11:36:09,963 - INFO - profitandloss.xlsx loaded successfully
+2026-07-14 11:36:09,970 - INFO - profitandloss.xlsx cleaned
+2026-07-14 11:36:09,977 - INFO - profitandloss_clean.csv saved
+2026-07-14 11:36:09,991 - INFO - prosandcons.xlsx loaded successfully
+2026-07-14 11:36:09,993 - INFO - prosandcons.xlsx cleaned
+2026-07-14 11:36:09,994 - INFO - prosandcons_clean.csv saved
+2026-07-14 11:36:10,014 - INFO - sectors.xlsx loaded successfully
+2026-07-14 11:36:10,016 - INFO - sectors.xlsx cleaned
+2026-07-14 11:36:10,018 - INFO - sectors_clean.csv saved
+2026-07-14 11:36:10,391 - INFO - stock_prices.xlsx loaded successfully
+2026-07-14 11:36:10,402 - INFO - stock_prices.xlsx cleaned
+2026-07-14 11:36:10,432 - INFO - stock_prices_clean.csv saved
+2026-07-14 11:36:10,434 - INFO - Load audit saved at C:\Users\Admin\nifty100-financial-analytics\output\load_audit.csv
+2026-07-14 11:36:10,434 - INFO - ========== ETL Completed ==========

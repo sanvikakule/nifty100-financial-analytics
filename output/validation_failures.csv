@@ -1,0 +1,6 @@
+Rule,File,Severity,Message
+DQ-03,profitandloss,WARNING,99 unmatched company_id values
+DQ-03,balancesheet,WARNING,85 unmatched company_id values
+DQ-03,cashflow,WARNING,96 unmatched company_id values
+DQ-03,analysis,WARNING,4 unmatched company_id values
+DQ-03,financial_ratios,WARNING,24 unmatched company_id values

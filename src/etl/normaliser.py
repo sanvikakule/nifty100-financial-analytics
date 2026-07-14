@@ -90,7 +90,8 @@ def normalize_year(df):
 
 def normalize_numeric(df):
     """
-    Remove commas, ₹ and % from numeric columns.
+    Clean numeric columns by removing commas, currency symbols,
+    percentages and converting values to numeric.
     """
 
     for col in df.columns:
@@ -103,8 +104,12 @@ def normalize_numeric(df):
                 .str.replace(",", "", regex=False)
                 .str.replace("₹", "", regex=False)
                 .str.replace("%", "", regex=False)
+                .str.replace("Cr", "", regex=False)
+                .str.replace("cr", "", regex=False)
+                .str.strip()
             )
 
-            df[col] = pd.to_numeric(df[col], errors="ignore")
+            df[col] = pd.to_numeric(df[col], errors="coerce")
 
     return df
+    

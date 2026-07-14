@@ -1,0 +1,8 @@
+2026-07-14 11:55:05,313 - INFO - ========== Validation Started ==========
+2026-07-14 11:55:05,332 - INFO - All processed datasets loaded.
+2026-07-14 11:55:05,353 - INFO - Validation report saved at C:\Users\Admin\nifty100-financial-analytics\output\validation_failures.csv
+2026-07-14 11:55:05,354 - INFO - ========== Validation Completed ==========
+2026-07-14 16:19:26,148 - INFO - ========== Validation Started ==========
+2026-07-14 16:19:26,169 - INFO - All processed datasets loaded.
+2026-07-14 16:19:26,214 - INFO - Validation report saved at C:\Users\Admin\nifty100-financial-analytics\output\validation_failures.csv
+2026-07-14 16:19:26,214 - INFO - ========== Validation Completed ==========
