@@ -1,21 +1,27 @@
--- =====================================================
--- NIFTY100 FINANCIAL ANALYTICS
--- SQLite Database Schema
--- Sprint 1 - Day 4
--- =====================================================
+-- ==========================================================
+-- NIFTY100 FINANCIAL ANALYTICS DATABASE
+-- SQLite Schema
+-- ==========================================================
 
-DROP TABLE IF EXISTS companies;
-DROP TABLE IF EXISTS profitandloss;
-DROP TABLE IF EXISTS balancesheet;
-DROP TABLE IF EXISTS cashflow;
-DROP TABLE IF EXISTS analysis;
+PRAGMA foreign_keys = OFF;
+
+DROP TABLE IF EXISTS stock_prices;
+DROP TABLE IF EXISTS documents;
 DROP TABLE IF EXISTS financial_ratios;
+DROP TABLE IF EXISTS cashflow;
+DROP TABLE IF EXISTS balancesheet;
+DROP TABLE IF EXISTS profitandloss;
+DROP TABLE IF EXISTS analysis;
+DROP TABLE IF EXISTS peer_groups;
+DROP TABLE IF EXISTS prosandcons;
+DROP TABLE IF EXISTS sectors;
+DROP TABLE IF EXISTS companies;
 
----------------------------------------------------------
--- Companies
----------------------------------------------------------
+-- ==========================================================
+-- COMPANIES
+-- ==========================================================
 
-CREATE TABLE companies (
+CREATE TABLE companies(
 
     id TEXT PRIMARY KEY,
 
@@ -40,17 +46,90 @@ CREATE TABLE companies (
     roce_percentage REAL,
 
     roe_percentage REAL
+
 );
 
----------------------------------------------------------
--- Profit & Loss
----------------------------------------------------------
+-- ==========================================================
+-- SECTORS
+-- ==========================================================
 
-CREATE TABLE profitandloss (
+CREATE TABLE sectors(
 
     id INTEGER PRIMARY KEY,
 
-    company_id TEXT,
+    company_id TEXT NOT NULL,
+
+    broad_sector TEXT,
+
+    sub_sector TEXT,
+
+    index_weight_pct REAL,
+
+    market_cap_category TEXT
+
+);
+
+-- ==========================================================
+-- PROS & CONS
+-- ==========================================================
+
+CREATE TABLE prosandcons(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
+
+    pros TEXT,
+
+    cons TEXT
+
+);
+
+-- ==========================================================
+-- PEER GROUPS
+-- ==========================================================
+
+CREATE TABLE peer_groups(
+
+    id INTEGER PRIMARY KEY,
+
+    peer_group_name TEXT,
+
+    company_id TEXT NOT NULL,
+
+    is_benchmark BOOLEAN
+
+);
+
+-- ==========================================================
+-- ANALYSIS
+-- ==========================================================
+
+CREATE TABLE analysis(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
+
+    compounded_sales_growth REAL,
+
+    compounded_profit_growth REAL,
+
+    stock_price_cagr REAL,
+
+    roe REAL
+
+);
+
+-- ==========================================================
+-- PROFIT & LOSS
+-- ==========================================================
+
+CREATE TABLE profitandloss(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
 
     year INTEGER,
 
@@ -77,17 +156,18 @@ CREATE TABLE profitandloss (
     eps REAL,
 
     dividend_payout REAL
+
 );
 
----------------------------------------------------------
--- Balance Sheet
----------------------------------------------------------
+-- ==========================================================
+-- BALANCE SHEET
+-- ==========================================================
 
-CREATE TABLE balancesheet (
+CREATE TABLE balancesheet(
 
     id INTEGER PRIMARY KEY,
 
-    company_id TEXT,
+    company_id TEXT NOT NULL,
 
     year INTEGER,
 
@@ -112,15 +192,15 @@ CREATE TABLE balancesheet (
     total_assets REAL
 );
 
----------------------------------------------------------
--- Cash Flow
----------------------------------------------------------
+-- ==========================================================
+-- CASH FLOW
+-- ==========================================================
 
-CREATE TABLE cashflow (
+CREATE TABLE cashflow(
 
     id INTEGER PRIMARY KEY,
 
-    company_id TEXT,
+    company_id TEXT NOT NULL,
 
     year INTEGER,
 
@@ -131,36 +211,18 @@ CREATE TABLE cashflow (
     financing_activity REAL,
 
     net_cash_flow REAL
+
 );
 
----------------------------------------------------------
--- Analysis
----------------------------------------------------------
+-- ==========================================================
+-- FINANCIAL RATIOS
+-- ==========================================================
 
-CREATE TABLE analysis (
+CREATE TABLE financial_ratios(
 
     id INTEGER PRIMARY KEY,
 
-    company_id TEXT,
-
-    compounded_sales_growth REAL,
-
-    compounded_profit_growth REAL,
-
-    stock_price_cagr REAL,
-
-    roe REAL
-);
-
----------------------------------------------------------
--- Financial Ratios
----------------------------------------------------------
-
-CREATE TABLE financial_ratios (
-
-    id INTEGER PRIMARY KEY,
-
-    company_id TEXT,
+    company_id TEXT NOT NULL,
 
     year INTEGER,
 
@@ -189,4 +251,75 @@ CREATE TABLE financial_ratios (
     total_debt_cr REAL,
 
     cash_from_operations_cr REAL
+
+);
+
+-- ==========================================================
+-- DOCUMENTS
+-- ==========================================================
+
+CREATE TABLE documents(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
+
+    year INTEGER,
+
+    annual_report TEXT
+
+);
+
+-- ==========================================================
+-- STOCK PRICES
+-- ==========================================================
+
+CREATE TABLE stock_prices(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
+
+    date TEXT,
+
+    open_price REAL,
+
+    high_price REAL,
+
+    low_price REAL,
+
+    close_price REAL,
+
+    volume REAL,
+
+    adjusted_close REAL
+
+);
+
+PRAGMA foreign_keys = ON;
+
+-- ==========================================================
+-- MARKET CAP
+-- ==========================================================
+
+CREATE TABLE market_cap(
+
+    id INTEGER PRIMARY KEY,
+
+    company_id TEXT NOT NULL,
+
+    year INTEGER,
+
+    market_cap_crore REAL,
+
+    enterprise_value_crore REAL,
+
+    pe_ratio REAL,
+
+    pb_ratio REAL,
+
+    ev_ebitda REAL,
+
+    dividend_yield_pct REAL
+
 );

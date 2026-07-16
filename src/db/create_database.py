@@ -12,6 +12,18 @@ DB_FOLDER.mkdir(parents=True, exist_ok=True)
 
 DATABASE = DB_FOLDER / "nifty100.db"
 
+# Remove old database if it exists
+import os
+
+if DATABASE.exists():
+    try:
+        os.remove(DATABASE)
+        print("Old database removed.")
+    except PermissionError:
+        print("Database is currently open.")
+        print("Please close SQLite/DB Browser/VS Code database viewer.")
+        raise
+
 SCHEMA = ROOT / "sql" / "schema.sql"
 
 # ==========================================================
@@ -24,8 +36,10 @@ def create_database():
 
     conn = sqlite3.connect(DATABASE)
 
-    cursor = conn.cursor()
+          # Enable Foreign Key Constraints
+    conn.execute("PRAGMA foreign_keys = ON;")
 
+    cursor = conn.cursor()
     print("Connected to SQLite.")
 
     with open(SCHEMA, "r", encoding="utf-8") as file:
