@@ -1,0 +1,59 @@
+========== RATIO EDGE CASE REPORT ==========
+
+Missing Values
+------------------------------
+id_pl                           0
+company_id                      0
+year                            0
+sales                           0
+expenses                        0
+operating_profit               12
+opm_percentage                 13
+other_income                    0
+interest                        0
+depreciation                    0
+profit_before_tax               0
+tax_percentage                  0
+net_profit                      0
+eps                             4
+dividend_payout                 4
+id_bs                           0
+equity_capital                  0
+reserves                        0
+borrowings                      0
+other_liabilities               0
+total_liabilities               0
+fixed_assets                    0
+cwip                            0
+investments                     0
+other_asset                     0
+total_assets                    0
+id                              0
+operating_activity              2
+investing_activity              2
+financing_activity              2
+net_cash_flow                   2
+net_profit_margin_pct           1
+operating_profit_margin_pct    13
+return_on_equity_pct            0
+book_value_per_share            0
+ebit                           12
+roce                           12
+roa                             1
+debt_to_equity                  0
+interest_coverage              43
+asset_turnover                  1
+net_debt                        0
+free_cash_flow                  2
+cfo_quality                     1
+capex_intensity                 1
+fcf_conversion                 15
+capital_allocation              0
+capex_cr                        2
+
+Negative Equity Companies : 0
+Zero Sales Records : 1
+Zero Operating Profit Records : 1
+Zero Interest Records : 31
+Missing EPS Records : 4
+Duplicate Company-Year : 0

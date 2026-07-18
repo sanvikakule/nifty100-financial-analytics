@@ -42,6 +42,30 @@ cash = pd.read_sql(
 )
 
 # ==========================================================
+# REMOVE DUPLICATES
+# ==========================================================
+
+profit = profit.drop_duplicates(
+    subset=["company_id", "year"],
+    keep="first"
+)
+
+balance = balance.drop_duplicates(
+    subset=["company_id", "year"],
+    keep="first"
+)
+
+cash = cash.drop_duplicates(
+    subset=["company_id", "year"],
+    keep="first"
+)
+
+print("\nDuplicates removed.")
+print("Profit & Loss :", len(profit))
+print("Balance Sheet :", len(balance))
+print("Cash Flow     :", len(cash))
+
+# ==========================================================
 # MERGE TABLES
 # ==========================================================
 
@@ -76,31 +100,6 @@ print(
 
 df = df2
 
-# ==========================================================
-# REMOVE DUPLICATES
-# ==========================================================
-
-profit = profit.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
-
-balance = balance.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
-
-cash = cash.drop_duplicates(
-    subset=["company_id", "year"],
-    keep="first"
-)
-
-print("Duplicates removed.")
-print("Profit & Loss :", len(profit))
-print("Balance Sheet :", len(balance))
-print("Cash Flow     :", len(cash))
-
-print(df.shape)
 
 print("\nCalculating Net Profit Margin...")
 
@@ -132,6 +131,13 @@ df["return_on_equity_pct"] = df.apply(
     ),
     axis=1
 )
+
+print("Calculating Book Value Per Share...")
+
+df["book_value_per_share"] = (
+    (df["equity_capital"] + df["reserves"])
+    / df["equity_capital"]
+).round(2)
 
 print("Calculating ROCE...")
 
@@ -254,29 +260,217 @@ df["capital_allocation"] = df.apply(
     axis=1
 )
 
-print("\n========== LEVERAGE & CASH FLOW KPIs ==========\n")
+print("\nAvailable Columns:\n")
+print(df.columns.tolist())
 
-print(
-    df[
-        [
-            "company_id",
-            "year",
-            "debt_to_equity",
-            "interest_coverage",
-            "asset_turnover",
-            "net_debt",
-            "free_cash_flow",
-            "cfo_quality",
-            "capex_intensity",
-            "fcf_conversion",
-            "capital_allocation"
-        ]
-    ].head(10)
+print("\n========== LEVERAGE & CASH FLOW KPIs ==========\n")
+# ==========================================================
+# PREPARE FINAL RATIO DATA
+# ==========================================================
+
+print("\n========== FINAL RATIO DATA ==========\n")
+
+# Book Value Per Share
+print("Calculating Book Value Per Share...")
+
+df["book_value_per_share"] = (
+    (df["equity_capital"] + df["reserves"])
+    / df["equity_capital"]
+).round(2)
+
+# CapEx (using Investing Activity)
+print("Calculating CapEx...")
+
+df["capex_cr"] = df["investing_activity"].abs()
+
+# Final dataframe for database insertion
+ratio_df = df[
+    [
+        "company_id",
+        "year",
+        "net_profit_margin_pct",
+        "operating_profit_margin_pct",
+        "return_on_equity_pct",
+        "debt_to_equity",
+        "interest_coverage",
+        "asset_turnover",
+        "free_cash_flow",
+        "capex_cr",
+        "eps",
+        "book_value_per_share",
+        "dividend_payout",
+        "borrowings",
+        "operating_activity",
+    ]
+].copy()
+
+# Rename columns to match SQLite table
+ratio_df.rename(
+    columns={
+        "free_cash_flow": "free_cash_flow_cr",
+        "eps": "earnings_per_share",
+        "dividend_payout": "dividend_payout_ratio_pct",
+        "borrowings": "total_debt_cr",
+        "operating_activity": "cash_from_operations_cr",
+    },
+    inplace=True,
 )
+
+# Display summary
+print("\nShape:")
+print(ratio_df.shape)
+
+print("\nColumns:")
+print(ratio_df.columns.tolist())
+
+print("\nPreview:")
+print(ratio_df.head(10))
 
 print(
     "\nDuplicate Company-Year:",
-    df.duplicated(
+    ratio_df.duplicated(
         subset=["company_id", "year"]
     ).sum()
 )
+
+# ==========================================================
+# INSERT INTO DATABASE
+# ==========================================================
+
+ratio_df.to_sql(
+    "financial_ratios",
+    conn,
+    if_exists="append",
+    index=False,
+)
+
+conn.commit()
+
+print("\n✅ Successfully inserted", len(ratio_df), "records into financial_ratios.")
+
+# ==========================================================
+# VERIFY INSERT
+# ==========================================================
+
+count = pd.read_sql(
+    "SELECT COUNT(*) AS total FROM financial_ratios",
+    conn
+)
+
+print("\nDatabase Verification:")
+print(count)
+
+conn.close()
+
+# ==========================================================
+# EXPORT CAPITAL ALLOCATION REPORT
+# ==========================================================
+
+from pathlib import Path
+
+OUTPUT_DIR = ROOT / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+capital_df = df[
+    [
+        "company_id",
+        "year",
+        "operating_activity",
+        "investing_activity",
+        "financing_activity",
+        "capital_allocation",
+    ]
+].copy()
+
+capital_file = OUTPUT_DIR / "capital_allocation.csv"
+
+capital_df.to_csv(
+    capital_file,
+    index=False
+)
+
+print(f"\nCapital Allocation report saved to:\n{capital_file}")
+
+# ==========================================================
+# GENERATE EDGE CASE LOG
+# ==========================================================
+
+REPORT_DIR = ROOT / "reports"
+REPORT_DIR.mkdir(exist_ok=True)
+
+log_file = REPORT_DIR / "ratio_edge_cases.log"
+
+with open(log_file, "w", encoding="utf-8") as f:
+
+    f.write("========== RATIO EDGE CASE REPORT ==========\n\n")
+
+    # Missing values
+    f.write("Missing Values\n")
+    f.write("------------------------------\n")
+    f.write(df.isnull().sum().to_string())
+    f.write("\n\n")
+
+    # Negative equity
+    negative_equity = df[df["equity_capital"] + df["reserves"] < 0]
+
+    f.write(f"Negative Equity Companies : {len(negative_equity)}\n")
+
+    # Zero Sales
+    zero_sales = df[df["sales"] == 0]
+    f.write(f"Zero Sales Records : {len(zero_sales)}\n")
+
+    # Zero Operating Profit
+    zero_op = df[df["operating_profit"] == 0]
+    f.write(f"Zero Operating Profit Records : {len(zero_op)}\n")
+
+    # Zero Interest
+    zero_interest = df[df["interest"] == 0]
+    f.write(f"Zero Interest Records : {len(zero_interest)}\n")
+
+    # Missing EPS
+    missing_eps = df[df["eps"].isna()]
+    f.write(f"Missing EPS Records : {len(missing_eps)}\n")
+
+    # Duplicate Company-Year
+    duplicates = df.duplicated(subset=["company_id", "year"]).sum()
+    f.write(f"Duplicate Company-Year : {duplicates}\n")
+
+print(f"\nEdge case report saved to:\n{log_file}")
+
+# ==========================================================
+# GENERATE ANALYTICS SUMMARY REPORT
+# ==========================================================
+
+summary_file = REPORT_DIR / "analytics_summary.txt"
+
+with open(summary_file, "w", encoding="utf-8") as f:
+
+    f.write("========== NIFTY 100 ANALYTICS SUMMARY ==========\n\n")
+
+    f.write(f"Total Records Processed        : {len(df)}\n")
+    f.write(f"Unique Companies              : {df['company_id'].nunique()}\n")
+    f.write(f"Years Covered                 : {int(df['year'].min())} - {int(df['year'].max())}\n\n")
+
+    f.write("========== KPI SUMMARY ==========\n\n")
+
+    f.write(f"Net Profit Margin             : {df['net_profit_margin_pct'].notna().sum()}\n")
+    f.write(f"Operating Profit Margin       : {df['operating_profit_margin_pct'].notna().sum()}\n")
+    f.write(f"Return on Equity              : {df['return_on_equity_pct'].notna().sum()}\n")
+    f.write(f"ROCE                          : {df['roce'].notna().sum()}\n")
+    f.write(f"ROA                           : {df['roa'].notna().sum()}\n")
+    f.write(f"Debt to Equity                : {df['debt_to_equity'].notna().sum()}\n")
+    f.write(f"Interest Coverage             : {df['interest_coverage'].notna().sum()}\n")
+    f.write(f"Asset Turnover                : {df['asset_turnover'].notna().sum()}\n")
+    f.write(f"Free Cash Flow                : {df['free_cash_flow'].notna().sum()}\n")
+    f.write(f"CFO Quality                   : {df['cfo_quality'].notna().sum()}\n")
+    f.write(f"Capital Allocation Pattern    : {df['capital_allocation'].notna().sum()}\n\n")
+
+    f.write("========== DATA QUALITY ==========\n\n")
+
+    f.write(f"Duplicate Company-Year        : {df.duplicated(subset=['company_id','year']).sum()}\n")
+    f.write(f"Missing Values                : {df.isnull().sum().sum()}\n")
+    f.write(f"Negative Equity Records       : {len(df[df['equity_capital'] + df['reserves'] < 0])}\n")
+    f.write(f"Zero Sales Records            : {len(df[df['sales'] == 0])}\n")
+    f.write(f"Zero Interest Records         : {len(df[df['interest'] == 0])}\n")
+
+print(f"\nAnalytics summary saved to:\n{summary_file}")

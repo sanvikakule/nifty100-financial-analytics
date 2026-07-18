@@ -1,0 +1,27 @@
+========== NIFTY 100 ANALYTICS SUMMARY ==========
+
+Total Records Processed        : 1121
+Unique Companies              : 97
+Years Covered                 : 2011 - 2024
+
+========== KPI SUMMARY ==========
+
+Net Profit Margin             : 1120
+Operating Profit Margin       : 1108
+Return on Equity              : 1121
+ROCE                          : 1109
+ROA                           : 1120
+Debt to Equity                : 1121
+Interest Coverage             : 1078
+Asset Turnover                : 1120
+Free Cash Flow                : 1119
+CFO Quality                   : 1120
+Capital Allocation Pattern    : 1121
+
+========== DATA QUALITY ==========
+
+Duplicate Company-Year        : 0
+Missing Values                : 145
+Negative Equity Records       : 0
+Zero Sales Records            : 1
+Zero Interest Records         : 31
