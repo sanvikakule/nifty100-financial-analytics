@@ -4,6 +4,7 @@
 
 import pandas as pd
 from src.screener.scoring import calculate_quality_score
+from src.screener.ranking import calculate_rankings
 
 # Mapping of YAML filter names to DataFrame columns
 FILTER_MAPPING = {
@@ -83,6 +84,7 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
     # Calculate Composite Quality Score
     # ------------------------------------------------------
     filtered_df = calculate_quality_score(filtered_df)
+    filtered_df = calculate_rankings(filtered_df)
 
     # ------------------------------------------------------
     # Rank Companies
@@ -97,22 +99,24 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
     # Final Output Columns
     # ------------------------------------------------------
     output_columns = [
-        "company_id",
-        "company_name",
-        "year",
-        "return_on_equity_pct",
-        "debt_to_equity",
-        "free_cash_flow_cr",
-        "operating_profit_margin_pct",
-        "interest_coverage",
-        "asset_turnover",
-        "market_cap_crore",
-        "pe_ratio",
-        "pb_ratio",
-        "dividend_yield_pct",
-        "sales",
-        "net_profit",
-        "composite_quality_score",
+        "quality_rank",
+    "quality_percentile",
+    "company_id",
+    "company_name",
+    "year",
+    "return_on_equity_pct",
+    "debt_to_equity",
+    "free_cash_flow_cr",
+    "operating_profit_margin_pct",
+    "interest_coverage",
+    "asset_turnover",
+    "market_cap_crore",
+    "pe_ratio",
+    "pb_ratio",
+    "dividend_yield_pct",
+    "sales",
+    "net_profit",
+    "composite_quality_score",
     ]
 
     output_columns = [
