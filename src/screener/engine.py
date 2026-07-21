@@ -1,3 +1,6 @@
+USE_PRESET = True
+PRESET_NAME = "quality_compounder"
+
 # ==========================================================
 # IMPORTS
 # ==========================================================
@@ -13,6 +16,8 @@ import yaml
 
 from src.screener.data_loader import load_screener_data
 from src.screener.filters import apply_filters
+from src.screener.presets import run_preset
+
 
 # ==========================================================
 # PATHS
@@ -63,7 +68,10 @@ print(config)
 # APPLY FILTERS
 # ==========================================================
 
-filtered_df = apply_filters(df, config)
+filtered_df = run_preset(
+    df,
+    "quality_compounder"
+)
 
 # ==========================================================
 # RESULTS
@@ -82,3 +90,8 @@ print(filtered_df.head())
 # ==========================================================
 
 print("\n========== SCREENER ENGINE READY ==========")
+
+if USE_PRESET:
+    filtered_df = run_preset(df, PRESET_NAME)
+else:
+    filtered_df = apply_filters(df, config)
