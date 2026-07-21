@@ -1,6 +1,6 @@
 filters:
 
-  roe_min: null
+  roe_min: 15
 
   debt_to_equity_max: null
 

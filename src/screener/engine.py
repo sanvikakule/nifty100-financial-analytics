@@ -8,40 +8,33 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 
-import sqlite3
 import pandas as pd
 import yaml
 
+from src.screener.data_loader import load_screener_data
 from src.screener.filters import apply_filters
 
 # ==========================================================
 # PATHS
 # ==========================================================
 
-DATABASE = ROOT / "data" / "db" / "nifty100.db"
-
 CONFIG = ROOT / "config" / "screener_config.yaml"
 
 # ==========================================================
-# CONNECT DATABASE
+# START ENGINE
 # ==========================================================
 
 print("\n========== NIFTY 100 SCREENER ENGINE ==========\n")
 
-conn = sqlite3.connect(DATABASE)
-
 # ==========================================================
-# LOAD FINANCIAL RATIOS
+# LOAD MASTER DATA
 # ==========================================================
 
-print("Loading financial ratios...\n")
+print("Loading screener data...\n")
 
-df = pd.read_sql(
-    "SELECT * FROM financial_ratios",
-    conn
-)
+df = load_screener_data()
 
-print("✓ Financial ratios loaded successfully")
+print("✓ Screener data loaded successfully")
 
 print(f"Rows    : {len(df)}")
 print(f"Columns : {len(df.columns)}")
@@ -64,17 +57,13 @@ with open(CONFIG, "r", encoding="utf-8") as file:
 print("✓ Configuration loaded successfully")
 
 print("\nCurrent Configuration:")
-
 print(config)
 
 # ==========================================================
 # APPLY FILTERS
 # ==========================================================
 
-filtered_df = apply_filters(
-    df,
-    config
-)
+filtered_df = apply_filters(df, config)
 
 # ==========================================================
 # RESULTS
@@ -86,14 +75,10 @@ print(f"Original Records : {len(df)}")
 print(f"Filtered Records : {len(filtered_df)}")
 
 print("\nFiltered Preview:")
-
 print(filtered_df.head())
 
 # ==========================================================
-# CLOSE CONNECTION
+# ENGINE COMPLETE
 # ==========================================================
 
-conn.close()
-
-print("\nDatabase connection closed.")
 print("\n========== SCREENER ENGINE READY ==========")
