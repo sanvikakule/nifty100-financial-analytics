@@ -3,6 +3,7 @@
 # ==========================================================
 
 import pandas as pd
+from src.screener.scoring import calculate_quality_score
 
 # Mapping of YAML filter names to DataFrame columns
 FILTER_MAPPING = {
@@ -31,27 +32,26 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
 
     print("\nApplying Filters...\n")
 
+    # ------------------------------------------------------
+    # Apply Filters
+    # ------------------------------------------------------
     for filter_name, value in filters.items():
 
-        # Skip disabled filters
         if value is None:
             continue
 
-        # Skip filters that are not mapped
         if filter_name not in FILTER_MAPPING:
             print(f"Skipping unknown filter: {filter_name}")
             continue
 
         column, operator = FILTER_MAPPING[filter_name]
 
-        # Skip if column does not exist
         if column not in filtered_df.columns:
             print(f"Column '{column}' not found. Skipping.")
             continue
 
         before = len(filtered_df)
 
-        # Apply filter
         if operator == ">=":
             filtered_df = filtered_df[
                 filtered_df[column] >= value
@@ -69,6 +69,9 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
             f"{before} -> {after}"
         )
 
+    # ------------------------------------------------------
+    # Screening Summary
+    # ------------------------------------------------------
     print("\n==============================")
     print("SCREENING SUMMARY")
     print("==============================")
@@ -77,21 +80,21 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
     print(f"Rejected Records : {len(df) - len(filtered_df)}")
 
     # ------------------------------------------------------
-    # Sort Results
+    # Calculate Composite Quality Score
+    # ------------------------------------------------------
+    filtered_df = calculate_quality_score(filtered_df)
+
+    # ------------------------------------------------------
+    # Rank Companies
     # ------------------------------------------------------
     filtered_df = filtered_df.sort_values(
-        by="return_on_equity_pct",
+        by="composite_quality_score",
         ascending=False,
         na_position="last"
     ).reset_index(drop=True)
 
     # ------------------------------------------------------
-    # Placeholder Composite Quality Score
-    # ------------------------------------------------------
-    filtered_df["composite_quality_score"] = 0.0
-
-    # ------------------------------------------------------
-    # Screener Output Columns
+    # Final Output Columns
     # ------------------------------------------------------
     output_columns = [
         "company_id",
@@ -112,12 +115,9 @@ def apply_filters(df: pd.DataFrame, config: dict) -> pd.DataFrame:
         "composite_quality_score",
     ]
 
-    # Keep only columns that actually exist
     output_columns = [
         col for col in output_columns
         if col in filtered_df.columns
     ]
 
-    filtered_df = filtered_df[output_columns]
-
-    return filtered_df
+    return filtered_df[output_columns]
