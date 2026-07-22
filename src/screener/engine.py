@@ -25,6 +25,7 @@ from src.screener.data_loader import load_screener_data
 from src.screener.filters import apply_filters
 from src.screener.presets import run_preset
 from src.screener.ranking import top_companies
+from src.visualization.radar_chart import generate_radar_chart
 
 # ==========================================================
 # PATHS
@@ -121,6 +122,13 @@ print(
             "composite_quality_score",
         ]
     ]
+)
+print("\nGenerating Radar Chart...\n")
+
+generate_radar_chart(
+    filtered_df,
+    "TCS",
+    "ITC"
 )
 
 # ==========================================================
