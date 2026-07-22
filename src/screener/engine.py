@@ -26,6 +26,7 @@ from src.screener.filters import apply_filters
 from src.screener.presets import run_preset
 from src.screener.ranking import top_companies
 from src.visualization.radar_chart import generate_radar_chart
+from src.reports.excel_report import export_excel_report
 
 # ==========================================================
 # PATHS
@@ -130,6 +131,10 @@ generate_radar_chart(
     "TCS",
     "ITC"
 )
+
+print("\nGenerating Excel Report...\n")
+
+export_excel_report(filtered_df)
 
 # ==========================================================
 # ENGINE COMPLETE
