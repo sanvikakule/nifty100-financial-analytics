@@ -15,18 +15,19 @@ PRESET_NAME = "quality_compounder"
 
 import sys
 from pathlib import Path
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
-
-import yaml
 
 from src.screener.data_loader import load_screener_data
 from src.screener.filters import apply_filters
 from src.screener.presets import run_preset
 from src.screener.ranking import top_companies
+from src.screener.validator import validate_dataframe
 from src.visualization.radar_chart import generate_radar_chart
 from src.reports.excel_report import export_excel_report
+from src.utils.logger import logger
 
 # ==========================================================
 # PATHS
@@ -35,109 +36,184 @@ from src.reports.excel_report import export_excel_report
 CONFIG = ROOT / "config" / "screener_config.yaml"
 
 # ==========================================================
-# START ENGINE
+# MAIN ENGINE
 # ==========================================================
 
-print("\n========== NIFTY 100 SCREENER ENGINE ==========\n")
+def main():
 
-# ==========================================================
-# LOAD DATA
-# ==========================================================
+    logger.info("=" * 60)
+    logger.info("NIFTY 100 Screener Engine Started")
 
-print("Loading screener data...\n")
+    print("\n========== NIFTY 100 SCREENER ENGINE ==========\n")
 
-df = load_screener_data()
+    # ======================================================
+    # LOAD DATA
+    # ======================================================
 
-print("✓ Screener data loaded successfully")
+    print("Loading screener data...\n")
 
-print(f"Rows    : {len(df)}")
-print(f"Columns : {len(df.columns)}")
+    df = load_screener_data()
 
-print("\nColumns:")
-print(df.columns.tolist())
+    validate_dataframe(df)
 
-print("\nPreview:")
-print(df.head())
+    logger.info(f"Loaded {len(df)} companies.")
 
-# ==========================================================
-# LOAD YAML CONFIGURATION
-# ==========================================================
+    print("✓ Screener data loaded successfully")
+    print("✓ Data validation passed.\n")
 
-print("\nLoading screener configuration...\n")
+    print(f"Rows    : {len(df)}")
+    print(f"Columns : {len(df.columns)}")
 
-with open(CONFIG, "r", encoding="utf-8") as file:
-    config = yaml.safe_load(file)
+    print("\nPreview:\n")
 
-print("✓ Configuration loaded successfully")
-
-print("\nCurrent Configuration:")
-print(config)
-
-# ==========================================================
-# RUN SCREENER
-# ==========================================================
-
-if USE_PRESET:
-
-    print(f"\nRunning Preset Screener : {PRESET_NAME}\n")
-
-    filtered_df = run_preset(
-        df,
-        PRESET_NAME
+    print(
+        df[
+            [
+                "company_id",
+                "company_name",
+                "return_on_equity_pct",
+                "debt_to_equity",
+                "market_cap_crore",
+            ]
+        ].head()
     )
 
-else:
+    # ======================================================
+    # LOAD CONFIG
+    # ======================================================
 
-    print("\nRunning Custom YAML Screener\n")
+    print("\nLoading screener configuration...\n")
 
-    filtered_df = apply_filters(
-        df,
-        config
-    )
+    with open(CONFIG, "r", encoding="utf-8") as file:
+        config = yaml.safe_load(file)
 
-# ==========================================================
-# RESULTS
-# ==========================================================
+    if "filters" not in config:
+        raise ValueError("Invalid screener configuration.")
 
-print("\n========== FILTER RESULTS ==========\n")
+    logger.info("Configuration loaded successfully.")
 
-print(f"Original Records : {len(df)}")
-print(f"Filtered Records : {len(filtered_df)}")
+    print("✓ Configuration loaded successfully")
 
-print("\nFiltered Preview:")
+    print("\nCurrent Configuration:\n")
+    print(config)
 
-print(filtered_df.head())
+    # ======================================================
+    # RUN SCREENER
+    # ======================================================
 
-# ==========================================================
-# TOP 10 COMPANIES
-# ==========================================================
+    if USE_PRESET:
 
-print("\n========== TOP 10 COMPANIES ==========\n")
+        print(f"\nRunning Preset Screener : {PRESET_NAME}\n")
 
-print(
-    top_companies(filtered_df)[
-        [
-            "quality_rank",
-            "company_id",
-            "company_name",
-            "composite_quality_score",
+        filtered_df = run_preset(
+            df,
+            PRESET_NAME
+        )
+
+    else:
+
+        print("\nRunning Custom YAML Screener\n")
+
+        filtered_df = apply_filters(
+            df,
+            config
+        )
+
+    logger.info(f"Filtered companies : {len(filtered_df)}")
+
+    # ======================================================
+    # VALIDATE RESULTS
+    # ======================================================
+
+    if filtered_df.empty:
+        raise ValueError(
+            "No companies matched the selected filters."
+        )
+
+    # ======================================================
+    # RESULTS
+    # ======================================================
+
+    print("\n========== FILTER RESULTS ==========\n")
+
+    print(f"Original Records : {len(df)}")
+    print(f"Filtered Records : {len(filtered_df)}")
+
+    print("\nFiltered Preview:\n")
+    print(filtered_df.head())
+
+    # ======================================================
+    # TOP 10
+    # ======================================================
+
+    print("\n========== TOP 10 COMPANIES ==========\n")
+
+    top10 = top_companies(filtered_df)
+
+    print(
+        top10[
+            [
+                "quality_rank",
+                "company_id",
+                "company_name",
+                "composite_quality_score",
+            ]
         ]
-    ]
-)
-print("\nGenerating Radar Chart...\n")
+    )
 
-generate_radar_chart(
-    filtered_df,
-    "TCS",
-    "ITC"
-)
+    # ======================================================
+    # RADAR CHART
+    # ======================================================
 
-print("\nGenerating Excel Report...\n")
+    print("\nGenerating Radar Chart...\n")
 
-export_excel_report(filtered_df)
+    company1 = top10.iloc[0]["company_id"]
+    company2 = top10.iloc[1]["company_id"]
+
+    generate_radar_chart(
+        filtered_df,
+        company1,
+        company2
+    )
+
+    logger.info(
+        f"Radar chart generated for {company1} vs {company2}"
+    )
+
+    # ======================================================
+    # EXCEL REPORT
+    # ======================================================
+
+    print("\nGenerating Excel Report...\n")
+
+    export_excel_report(filtered_df)
+
+    logger.info("Excel report generated successfully.")
+
+    # ======================================================
+    # COMPLETE
+    # ======================================================
+
+    print("\n========== SCREENER ENGINE READY ==========\n")
+
+    logger.info("Engine completed successfully.")
+    logger.info("=" * 60)
+
 
 # ==========================================================
-# ENGINE COMPLETE
+# ENTRY POINT
 # ==========================================================
 
-print("\n========== SCREENER ENGINE READY ==========\n")
+if __name__ == "__main__":
+
+    try:
+        main()
+
+    except Exception as e:
+
+        logger.exception("Engine failed.")
+
+        print("\n❌ ERROR")
+        print("=" * 50)
+        print(e)
+        print("=" * 50)

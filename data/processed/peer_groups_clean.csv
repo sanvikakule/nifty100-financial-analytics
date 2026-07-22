@@ -55,3 +55,45 @@ id,peer_group_name,company_id,is_benchmark
 54,Consumer Finance,BAJFINANCE,True
 55,Consumer Finance,CHOLAFIN,False
 56,Consumer Finance,SHRIRAMFIN,False
+57,Industrial Equipment,ABB,False
+58,Diversified,ADANIENT,False
+59,Power & Utilities,ADANIENSOL,False
+60,Ports & Logistics,ADANIPORTS,True
+61,Cement,AMBUJACEM,False
+62,Hospitals,APOLLOHOSP,True
+63,Paints,ASIANPAINT,True
+64,Financial Services,BAJAJFINSV,True
+65,Holding Company,BAJAJHLDNG,True
+66,Defence,BEL,False
+67,Telecom,BHARTIARTL,True
+68,Capital Goods,BHEL,False
+69,Auto Components,BOSCHLTD,True
+70,Mining,COALINDIA,True
+71,Real Estate,DLF,True
+72,Retail,DMART,True
+73,Cement,GRASIM,False
+74,Defence,HAL,True
+75,Electrical Equipment,HAVELLS,True
+76,Insurance,ICICIGI,True
+77,Aviation,INDIGO,True
+78,Railway Services,IRCTC,True
+79,NBFC,IRFC,False
+80,Financial Services,JIOFIN,False
+81,Real Estate,LODHA,False
+82,Engineering & Construction,LT,True
+83,Auto Components,MOTHERSON,False
+84,Internet Services,NAUKRI,True
+85,Power Finance,PFC,True
+86,Specialty Chemicals,PIDILITIND,True
+87,Power Finance,RECLTD,False
+88,Cement,SHREECEM,False
+89,Industrial Equipment,SIEMENS,True
+90,Consumer Discretionary,TITAN,True
+91,Retail,TRENT,False
+92,Cement,ULTRACEMCO,True
+93,Public Sector Banks,UNIONBANK,False
+94,Beverages,UNITDSPR,True
+95,Metals & Mining,VEDL,True
+96,IT Services,WIPRO,False
+97,Internet Commerce,ZOMATO,True
+98,Pharmaceuticals,ZYDUSLIFE,False

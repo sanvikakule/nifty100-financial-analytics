@@ -1,0 +1,9 @@
+2026-07-22 17:19:55,755 | INFO | ============================================================
+2026-07-22 17:19:55,755 | INFO | NIFTY 100 Screener Engine Started
+2026-07-22 17:19:55,783 | INFO | Loaded 97 companies.
+2026-07-22 17:19:55,792 | INFO | Configuration loaded successfully.
+2026-07-22 17:19:55,803 | INFO | Filtered companies : 18
+2026-07-22 17:19:56,291 | INFO | Radar chart generated for INDIGO vs ITC
+2026-07-22 17:19:56,344 | INFO | Excel report generated successfully.
+2026-07-22 17:19:56,345 | INFO | Engine completed successfully.
+2026-07-22 17:19:56,345 | INFO | ============================================================
